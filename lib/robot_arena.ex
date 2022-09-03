@@ -3,16 +3,10 @@ defmodule RobotArena do
   Documentation for `RobotArena`.
   """
 
-  @doc """
-  Hello world.
+  use Application
 
-  ## Examples
-
-      iex> RobotArena.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def start(_type, _args) do
+    children = []
+    Supervisor.start_link(children, strategy: :one_for_one)
   end
 end
