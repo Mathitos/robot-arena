@@ -13,7 +13,7 @@ defmodule RobotArena.MixProject do
 
   # Run "mix help compile.app" to learn about applications.
   def application do
-    [mod: {RobotArena, []}, extra_applications: [:logger]]
+    [mod: {RobotArena.Application, []}, extra_applications: [:logger]]
   end
 
   # Run "mix help deps" to learn about dependencies.

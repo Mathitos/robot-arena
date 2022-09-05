@@ -1,4 +1,4 @@
-defmodule RobotArena do
+defmodule RobotArena.Application do
   use Application
 
   @moduledoc """
