@@ -5,8 +5,16 @@ defmodule RobotArena.Application do
   Documentation for `RobotArena`.
   """
 
+  @env Mix.env()
+
   def start(_type, _args) do
-    children = [
+    children = get_children(@env)
+
+    Supervisor.start_link(children, strategy: :one_for_one)
+  end
+
+  defp get_children(:test) do
+    [
       Plug.Cowboy.child_spec(
         scheme: :http,
         plug: MyWebsocketApp.Router,
@@ -16,8 +24,20 @@ defmodule RobotArena.Application do
         ]
       )
     ]
+  end
 
-    Supervisor.start_link(children, strategy: :one_for_one)
+  defp get_children(_) do
+    [
+      {RobotArena.GameState, []},
+      Plug.Cowboy.child_spec(
+        scheme: :http,
+        plug: MyWebsocketApp.Router,
+        options: [
+          dispatch: dispatch(),
+          port: 4000
+        ]
+      )
+    ]
   end
 
   defp dispatch do
