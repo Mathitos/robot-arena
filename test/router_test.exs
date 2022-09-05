@@ -1,8 +1,8 @@
-defmodule RobotArena.ControllerTest do
+defmodule RobotArena.RouterTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
-  @opts RobotArena.Controller.init([])
+  @opts RobotArena.Router.init([])
 
   describe "index" do
     test "returns welcome message" do
@@ -10,7 +10,7 @@ defmodule RobotArena.ControllerTest do
       conn = conn(:get, "/")
 
       # Invoke the plug
-      conn = RobotArena.Controller.call(conn, @opts)
+      conn = RobotArena.Router.call(conn, @opts)
 
       # Assert the response and status
       assert conn.state == :sent
